@@ -12,7 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-    </style>
+    </style>    
 
     <style name="Theme.Sharepal.NoActionBar">
         <item name="windowActionBar">false</item>

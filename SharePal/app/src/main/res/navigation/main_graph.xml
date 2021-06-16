@@ -7,5 +7,13 @@
     <fragment
         android:id="@+id/introductionFragment"
         android:name="com.hidevelopers.sharepal.presentation.ui.introduction.IntroductionFragment"
-        android:label="IntroductionFragment" />
+        android:label="IntroductionFragment" >
+        <action
+            android:id="@+id/viewMainInfo"
+            app:destination="@id/mainInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainInfoFragment"
+        android:name="com.hidevelopers.sharepal.presentation.ui.main.MainInfoFragment"
+        android:label="MainInfoFragment" />
 </navigation>

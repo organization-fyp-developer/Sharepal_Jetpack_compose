@@ -20,6 +20,7 @@ val RobotoCondensed = FontFamily(
     Font(R.font.roboto_condensed_light, FontWeight.Light),
     Font(R.font.roboto_condensed_regular, FontWeight.Normal),
 )
+
 // Set of Material typography styles to start with
 val Typography = Typography(
     body1 = TextStyle(
@@ -36,6 +37,11 @@ val Typography = Typography(
         fontFamily = Roboto,
         fontWeight = FontWeight.Bold,
         fontSize = 24.sp
+    ),
+    h3 = TextStyle(
+        fontFamily = Roboto,
+        fontWeight = FontWeight.Bold,
+        fontSize = 18.sp
     )
     /* Other default text styles to override
     button = TextStyle(

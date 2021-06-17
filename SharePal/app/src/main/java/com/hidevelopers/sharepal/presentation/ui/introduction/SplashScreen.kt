@@ -16,10 +16,6 @@ fun SplashScreen(
     viewModel: IntroductionViewModel = viewModel(),
     onFinished: () -> Unit
 ) {
-    produceState(initialValue = 0){
-        delay(viewModel.splashScreenDelay)
-        onFinished()
-    }
     Surface {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -27,5 +23,9 @@ fun SplashScreen(
         ) {
             Text(text = "SharePah")
         }
+    }
+    produceState(initialValue = 0){
+        delay(viewModel.splashScreenDelay)
+        onFinished()
     }
 }

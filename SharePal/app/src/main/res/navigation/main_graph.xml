@@ -10,7 +10,9 @@
         android:label="IntroductionFragment" >
         <action
             android:id="@+id/viewMainInfo"
-            app:destination="@id/mainInfoFragment" />
+            app:destination="@id/mainInfoFragment"
+            app:popUpTo="@id/introductionFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/mainInfoFragment"

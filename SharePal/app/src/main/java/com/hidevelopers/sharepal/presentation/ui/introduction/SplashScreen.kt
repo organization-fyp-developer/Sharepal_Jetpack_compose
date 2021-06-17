@@ -21,7 +21,7 @@ fun SplashScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            Text(text = "SharePah")
+            Text(text = "SharePal")
         }
     }
     produceState(initialValue = 0){

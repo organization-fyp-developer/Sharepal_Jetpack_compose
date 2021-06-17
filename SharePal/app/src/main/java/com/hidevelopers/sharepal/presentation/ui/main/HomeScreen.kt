@@ -1,9 +1,11 @@
 package com.hidevelopers.sharepal.presentation.ui.main
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -13,6 +15,11 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.hidevelopers.sharepal.R
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Text
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 
 
 @Composable
@@ -55,7 +62,7 @@ fun HomeTopBar(
             ),
         title = {
             Text(
-                text = "ShareP al"
+                text = "SharePal"
             )
         }
     )
@@ -109,21 +116,97 @@ fun StorageCard(
 
 @Composable
 fun ButtonCard() {
-    Card(
-        backgroundColor = MaterialTheme.colors.surface,
-        elevation = 1.dp
+    Row(
+        Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.Center,
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        Row {
-            FloatingActionButton(onClick = { /*TODO*/ },
-                modifier = Modifier
-                    .padding(all = 5.dp),
-                backgroundColor = MaterialTheme.colors.primary
-            ) {
-                Icon(
-                    painter = painterResource(id = R.drawable.ic_receive_icon),
-                    contentDescription = null
-                )
+        Card(
+            backgroundColor = MaterialTheme.colors.surface,
+            elevation = 10.dp,
+            shape = RoundedCornerShape(15.dp),
+            modifier = Modifier
+                .fillMaxWidth(0.5F)
+                .padding(start = 5.dp, top = 5.dp, end = 5.dp, bottom = 5.dp)
+        ) {
+            Box {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_send_icon),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .height(150.dp)
+                            .fillMaxWidth()
+                            .padding(horizontal = 40.dp, vertical = 20.dp)
+                    )
+                    FloatingActionButton(
+                        onClick = { /*TODO*/ },
+
+                        modifier = Modifier
+                            .padding(bottom = 10.dp),
+                        backgroundColor = MaterialTheme.colors.primary,
+                        shape = RoundedCornerShape(30)
+                    ) {
+                        Text(
+                            text = "Send",
+                            style = TextStyle(color = Color.White, fontSize = 24.sp),
+                            modifier = Modifier
+                                .padding(horizontal = 50.dp, vertical = 3.dp)
+                        )
+                    }
+                }
+
             }
         }
+
+        Card(
+            backgroundColor = MaterialTheme.colors.surface,
+            elevation = 10.dp,
+            shape = RoundedCornerShape(15.dp),
+            modifier = Modifier
+                .fillMaxWidth(1F)
+                .padding(start = 5.dp, top = 5.dp, end = 5.dp, bottom = 5.dp)
+        ) {
+            Box {
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.ic_receive_icon),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .height(150.dp)
+                            .fillMaxWidth()
+                            .padding(horizontal = 40.dp, vertical = 5.dp)
+                    )
+
+                    FloatingActionButton(
+                        onClick = { /*TODO*/ },
+                        modifier = Modifier
+                            .padding(bottom = 10.dp),
+                        backgroundColor = MaterialTheme.colors.primary,
+                        shape = RoundedCornerShape(30)
+                    ) {
+
+                        Text(
+                            text = "Receive",
+                            style = TextStyle(color = Color.White, fontSize = 24.sp),
+                            modifier = Modifier
+                                .padding(horizontal = 40.dp, vertical = 3.dp)
+                        )
+                    }
+                }
+
+            }
+        }
+
+
     }
 }

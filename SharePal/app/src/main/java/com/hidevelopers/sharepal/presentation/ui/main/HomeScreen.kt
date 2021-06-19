@@ -19,6 +19,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.TextStyle
 
 
@@ -40,8 +41,10 @@ fun HomeScreen(
                     occupiedStorage = viewModel.bytesToHuman(viewModel.totalMemory()),
                     totalStorage = viewModel.bytesToHuman(viewModel.totalMemory())
                 )
-
                 ButtonCard()
+                Spacer(modifier = Modifier.padding(10.dp))
+                recentFriends()
+                latestHistory()
             }
         }
     }
@@ -49,15 +52,14 @@ fun HomeScreen(
 
 @Composable
 fun HomeTopBar(
-    modifier: Modifier = Modifier
 ) {
     TopAppBar(
         elevation = 4.dp,
         modifier = Modifier
             .padding(
-                start = 20.dp,
-                end = 20.dp,
-                top = 20.dp,
+                start = 5.dp,
+                end = 5.dp,
+                top = 5.dp,
                 bottom = 5.dp
             ),
         title = {
@@ -116,6 +118,10 @@ fun StorageCard(
 
 @Composable
 fun ButtonCard() {
+    val textSend = "Send"
+    val textReceive = "Receive"
+    val imageSend = painterResource(id = R.drawable.ic_send_icon)
+    val imageReceive = painterResource(id = R.drawable.ic_receive_icon)
     Row(
         Modifier
             .fillMaxWidth(),
@@ -127,41 +133,11 @@ fun ButtonCard() {
             elevation = 10.dp,
             shape = RoundedCornerShape(15.dp),
             modifier = Modifier
-                .fillMaxWidth(0.5F)
+                .fillMaxWidth()
+                .weight(1f)
                 .padding(start = 5.dp, top = 5.dp, end = 5.dp, bottom = 5.dp)
         ) {
-            Box {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_send_icon),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .height(150.dp)
-                            .fillMaxWidth()
-                            .padding(horizontal = 40.dp, vertical = 20.dp)
-                    )
-                    FloatingActionButton(
-                        onClick = { /*TODO*/ },
-
-                        modifier = Modifier
-                            .padding(bottom = 10.dp),
-                        backgroundColor = MaterialTheme.colors.primary,
-                        shape = RoundedCornerShape(30)
-                    ) {
-                        Text(
-                            text = "Send",
-                            style = TextStyle(color = Color.White, fontSize = 24.sp),
-                            modifier = Modifier
-                                .padding(horizontal = 50.dp, vertical = 3.dp)
-                        )
-                    }
-                }
-
-            }
+            buttonDesigns(buttonText = textSend, imageResource = imageSend )
         }
 
         Card(
@@ -169,44 +145,67 @@ fun ButtonCard() {
             elevation = 10.dp,
             shape = RoundedCornerShape(15.dp),
             modifier = Modifier
-                .fillMaxWidth(1F)
+                .fillMaxWidth()
+                .weight(1f)
                 .padding(start = 5.dp, top = 5.dp, end = 5.dp, bottom = 5.dp)
         ) {
-            Box {
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.ic_receive_icon),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .height(150.dp)
-                            .fillMaxWidth()
-                            .padding(horizontal = 40.dp, vertical = 5.dp)
-                    )
-
-                    FloatingActionButton(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier
-                            .padding(bottom = 10.dp),
-                        backgroundColor = MaterialTheme.colors.primary,
-                        shape = RoundedCornerShape(30)
-                    ) {
-
-                        Text(
-                            text = "Receive",
-                            style = TextStyle(color = Color.White, fontSize = 24.sp),
-                            modifier = Modifier
-                                .padding(horizontal = 40.dp, vertical = 3.dp)
-                        )
-                    }
-                }
-
-            }
+            buttonDesigns(buttonText = textReceive, imageResource = imageReceive)
         }
 
 
     }
+}
+
+@Composable
+fun buttonDesigns (
+    buttonText : String,
+    imageResource : Painter
+) {
+
+        Box {
+            Column(
+                modifier = Modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Icon(
+                    painter = imageResource,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .height(100.dp)
+                        .fillMaxWidth()
+                        .padding(horizontal = 40.dp, vertical = 20.dp)
+                )
+                FloatingActionButton(
+                    onClick = {
+                              /*TODO*/
+                              },
+
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 8.dp, start = 15.dp, end = 15.dp)
+                        .fillMaxWidth(),
+                    backgroundColor = MaterialTheme.colors.primary,
+                    shape = RoundedCornerShape(30)
+                ) {
+                    Text(
+                        text = buttonText,
+                        style = TextStyle(color = Color.White, fontSize = 20.sp),
+                    )
+                }
+            }
+
+        }
+
+}
+
+@Composable
+fun recentFriends(){
+    Text(text = "Recent Friends")
+    Spacer(modifier = Modifier.padding(50.dp))
+}
+
+@Composable
+fun latestHistory(){
+    Text(text = "Latest History")
+    Spacer(modifier = Modifier.padding(100.dp))
 }

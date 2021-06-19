@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.compose.material:material-icons-extended:1.0.0-beta08@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/5786e01906ceed28216155f328c795e8/transformed/jetified-material-icons-extended-1.0.0-beta08/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5786e01906ceed28216155f328c795e8/transformed/jetified-material-icons-extended-1.0.0-beta08/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/5786e01906ceed28216155f328c795e8/transformed/jetified-material-icons-extended-1.0.0-beta08/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e70e2b8d04597008be77f2892d9fc3df/transformed/jetified-material-icons-extended-1.0.0-beta08/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/e70e2b8d04597008be77f2892d9fc3df/transformed/jetified-material-icons-extended-1.0.0-beta08/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/e70e2b8d04597008be77f2892d9fc3df/transformed/jetified-material-icons-extended-1.0.0-beta08/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

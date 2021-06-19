@@ -3,7 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Haris/Final year project/Project Application/Sharepal_Jetpack_compose/SharePal/app/src/main/res/drawable/ic_receive_icon.xml" value="0.111" />
+        <entry key="..\:/Haris/Final year project/Project Application/Sharepal_Jetpack_compose/SharePal/app/src/main/res/drawable/ic_send_icon.xml" value="0.111" />
         <entry key="..\:/Haris/Final year project/Project Application/Sharepal_Jetpack_compose/SharePal/app/src/main/res/layout/activity_main.xml" value="0.17798913043478262" />
+        <entry key="..\:/Haris/Final year project/Project Application/Sharepal_Jetpack_compose/SharePal/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.197" />
       </map>
     </option>
   </component>

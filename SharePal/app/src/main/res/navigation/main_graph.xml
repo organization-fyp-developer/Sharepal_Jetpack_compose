@@ -17,5 +17,33 @@
     <fragment
         android:id="@+id/mainInfoFragment"
         android:name="com.hidevelopers.sharepal.presentation.ui.main.MainInfoFragment"
-        android:label="MainInfoFragment" />
+        android:label="MainInfoFragment" >
+        <action
+            android:id="@+id/action_mainInfoFragment_to_shareInfoFragment"
+            app:destination="@id/shareInfoFragment" />
+        <action
+            android:id="@+id/action_mainInfoFragment_to_receiveInfoFragment2"
+            app:destination="@id/receiveInfoFragment2"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/shareInfoFragment"
+        android:name="com.hidevelopers.sharepal.presentation.ui.share.ShareInfoFragment"
+        android:label="ShareInfoFragment" >
+        <action
+            android:id="@+id/action_shareInfoFragment_to_mainInfoFragment"
+            app:destination="@id/mainInfoFragment"
+            app:popUpTo="@id/mainInfoFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/receiveInfoFragment2"
+        android:name="com.hidevelopers.sharepal.presentation.ui.receive.ReceiveInfoFragment"
+        android:label="ReceiveInfoFragment" >
+        <action
+            android:id="@+id/action_receiveInfoFragment2_to_mainInfoFragment"
+            app:destination="@id/mainInfoFragment"
+            app:popUpTo="@id/mainInfoFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 </navigation>

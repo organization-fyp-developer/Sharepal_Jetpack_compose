@@ -1,13 +1,12 @@
 package com.hidevelopers.sharepal.presentation.ui.share
 
-import androidx.compose.animation.expandHorizontally
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -18,10 +17,19 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.hidevelopers.sharepal.R
 import androidx.compose.foundation.layout.Column
-import androidx.compose.material.TabRow
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
-import javax.annotation.meta.When
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import kotlinx.coroutines.flow.channelFlow
 
 
 @Composable
@@ -41,7 +49,7 @@ fun SelectDataScreen(
         ) {
             Column {
 
-             tabsBar()
+                tabsBar()
 
 
             }
@@ -83,7 +91,9 @@ fun SelectDataTopBar(
 @Composable
 fun tabsBar() {
     var state by remember { mutableStateOf(0) }
-    val titles = listOf("RECENT", "FILES", "VIDEOS", "APPS", "PHOTOS", "MUSIC")
+    val titles = listOf("FILES", "VIDEOS", "APPS", "PHOTOS", "MUSIC")
+    var stateScroll = rememberScrollState()
+
     Column {
         ScrollableTabRow(
             selectedTabIndex = state,
@@ -92,7 +102,7 @@ fun tabsBar() {
             modifier = Modifier
                 .height(30.dp)
                 .padding(0.dp),
-        ){
+        ) {
             titles.forEachIndexed { index, title ->
                 Tab(
                     text = { Text(title) },
@@ -102,56 +112,152 @@ fun tabsBar() {
             }
         }
 
-        when(state){
+        when (state) {
+
             0 -> {
-                recentFiles()
+                allFilesOfAndroid(state)
             }
             1 -> {
-                allFilesOfAndroid()
+                allVideos(state)
             }
             2 -> {
-                allVideos()
+                allAppsInstalled(state)
             }
             3 -> {
-                allAppsInstalled()
+                val painter = painterResource(R.drawable.antman)
+                val description = "It is Ant-man"
+
+                Column(
+                    modifier = Modifier.verticalScroll(stateScroll)
+                ) {
+
+                    for (i in 1..10) {
+                    Row {
+                        allPhotos(
+                            painter = painter,
+                            contentDescription = description,
+                            modifier = Modifier.weight(1f)
+                            )
+                        allPhotos(
+                            painter = painter,
+                            contentDescription = description,
+                            modifier = Modifier.weight(1f)
+
+                        )
+                        allPhotos(
+                            painter = painter,
+                            contentDescription = description,
+                            modifier = Modifier.weight(1f)
+
+                        )
+                    }
+                    }
+
+
+
+
+                }
+
             }
+
             4 -> {
-                allPhotos()
-            }
-            5 -> {
-                allAudioFiles()
+                allAudioFiles(state)
             }
         }
-
     }
 }
-@Composable
-fun recentFiles(){
 
+@Composable
+fun allFilesOfAndroid(state: Int) {
+    Text(
+        text = "Tab ${state + 1} is Selected"
+    )
 }
 
 @Composable
-fun allFilesOfAndroid(){
-
+fun allVideos(state: Int) {
+    Text(
+        text = "Tab ${state + 1} is Selected"
+    )
 }
 
 @Composable
-fun allVideos(){
-
+fun allAppsInstalled(state: Int) {
+    Text(
+        text = "Tab ${state + 1} is Selected"
+    )
 }
 
 @Composable
-fun allAppsInstalled(){
+fun allPhotos(
+    painter: Painter,
+    contentDescription: String,
+    modifier: Modifier = Modifier
+) {
+    var isChecked = remember { mutableStateOf(false) }
 
-}
+
+        Card(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(5.dp)
+                .size(120.dp),
+            shape = RoundedCornerShape(15.dp),
+            elevation = 5.dp
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight(0.2f)
+            ) {
+                Image(
+                    painter = painter,
+                    contentDescription = contentDescription,
+                    contentScale = ContentScale.Crop
+                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight(0.21f)
+                        .fillMaxWidth(1f)
+                        .background(
+                            Brush.verticalGradient(
+                                colors = listOf(
+                                    Color.DarkGray,
+                                    Color.Transparent
+                                ),
+                                startY = 0f
+                            )
+                        ),
+                )
+                Box(
+                    modifier = Modifier
+                        .padding(all = 7.dp)
+                        .background(
+                            color = Color.Transparent
+                        )
+                        .size(25.dp)
+                        .align(Alignment.TopEnd)
+                ) {
+                    Checkbox(
+                        checked = isChecked.value,
+                        onCheckedChange = {
+                            isChecked.value = it
+                        },
+                        //   colors = CheckboxDefaults.colors(MaterialTheme.colors.surface),
+                        modifier = Modifier.fillMaxSize(),
+
+                    )
+                }
+
+            }
+        }
+    }
+
+
 
 @Composable
-fun allPhotos(){
-
-}
-
-@Composable
-fun allAudioFiles(){
-
+fun allAudioFiles(state: Int) {
+    Text(
+        text = "Tab ${state + 1} is Selected"
+    )
 }
 

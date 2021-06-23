@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
- //   id 'dagger.hilt.android.plugin'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -80,19 +80,16 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
 
     //DAGGER HILT
-//    implementation "com.google.dagger:hilt-android:2.31-alpha"
-//    kapt "com.google.dagger:hilt-android-compiler:2.31-alpha"
-//
-//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-//    kapt "androidx.hilt:hilt-compiler:1.0.0"
-//    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-alpha01'
-//    def hilt = "2.36"
-//    implementation "com.google.dagger:hilt-android:$hilt"
-//    kapt "com.google.dagger:hilt-android-compiler:$hilt"
-//
-//    def hilt_lifecycle_viewModel = "1.0.0-alpha03"
-//    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hilt_lifecycle_viewModel"
-//    kapt "androidx.hilt:hilt-compiler:$hilt_lifecycle_viewModel"
+    implementation 'com.google.dagger:hilt-android:2.37'
+    kapt 'com.google.dagger:hilt-compiler:2.37'
+
+    // For instrumentation tests
+    androidTestImplementation  'com.google.dagger:hilt-android-testing:2.37'
+    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.37'
+
+    // For local unit tests
+    testImplementation 'com.google.dagger:hilt-android-testing:2.37'
+    kaptTest 'com.google.dagger:hilt-compiler:2.37'
 
     // TIMBER
     implementation 'com.jakewharton.timber:timber:4.7.1'

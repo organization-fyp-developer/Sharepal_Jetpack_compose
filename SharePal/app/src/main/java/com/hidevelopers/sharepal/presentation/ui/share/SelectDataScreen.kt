@@ -1,14 +1,22 @@
 package com.hidevelopers.sharepal.presentation.ui.share
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -16,27 +24,18 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.hidevelopers.sharepal.R
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import kotlinx.coroutines.flow.channelFlow
 
 
 @Composable
 fun SelectDataScreen(
     navController: NavHostController,
     findNavController_openHomePage: NavController,
+    //viewModel: ShareViewModel = viewModel(),
 ) {
+//    Timber.i("${viewModel.getALlAudioList}")
+//    Timber.i("${viewModel.getAllImageList}")
+//    Timber.i("${viewModel.getALlAppInstallList}")
+//    Timber.i("${viewModel.getAllVideoList}")
     Surface(
         color = MaterialTheme.colors.surface
     ) {
@@ -49,7 +48,7 @@ fun SelectDataScreen(
         ) {
             Column {
 
-                tabsBar()
+                TabsBar()
 
 
             }
@@ -89,10 +88,9 @@ fun SelectDataTopBar(
 }
 
 @Composable
-fun tabsBar() {
+fun TabsBar() {
     var state by remember { mutableStateOf(0) }
     val titles = listOf("FILES", "VIDEOS", "APPS", "PHOTOS", "MUSIC")
-    var stateScroll = rememberScrollState()
 
     Column {
         ScrollableTabRow(
@@ -115,149 +113,240 @@ fun tabsBar() {
         when (state) {
 
             0 -> {
-                allFilesOfAndroid(state)
+                AllFilesOfAndroid(state)
             }
             1 -> {
-                allVideos(state)
+                DisplayThumbnailItems()
             }
             2 -> {
-                allAppsInstalled(state)
+                AllAppsInstalled(state)
             }
             3 -> {
-                val painter = painterResource(R.drawable.antman)
-                val description = "It is Ant-man"
-
-                Column(
-                    modifier = Modifier.verticalScroll(stateScroll)
-                ) {
-
-                    for (i in 1..10) {
-                    Row {
-                        allPhotos(
-                            painter = painter,
-                            contentDescription = description,
-                            modifier = Modifier.weight(1f)
-                            )
-                        allPhotos(
-                            painter = painter,
-                            contentDescription = description,
-                            modifier = Modifier.weight(1f)
-
-                        )
-                        allPhotos(
-                            painter = painter,
-                            contentDescription = description,
-                            modifier = Modifier.weight(1f)
-
-                        )
-                    }
-                    }
-
-
-
-
-                }
-
+                DisplayThumbnailItems()
             }
 
             4 -> {
-                allAudioFiles(state)
+                DisplayAudioItems()
             }
         }
     }
 }
 
 @Composable
-fun allFilesOfAndroid(state: Int) {
+fun AllFilesOfAndroid(state: Int) {
+    Text(
+        text = "Tab ${state + 1} is Selected"
+    )
+}
+
+
+@Composable
+fun AllAppsInstalled(state: Int) {
     Text(
         text = "Tab ${state + 1} is Selected"
     )
 }
 
 @Composable
-fun allVideos(state: Int) {
-    Text(
-        text = "Tab ${state + 1} is Selected"
-    )
-}
-
-@Composable
-fun allAppsInstalled(state: Int) {
-    Text(
-        text = "Tab ${state + 1} is Selected"
-    )
-}
-
-@Composable
-fun allPhotos(
+fun ThumbnailTabDesign(
     painter: Painter,
     contentDescription: String,
     modifier: Modifier = Modifier
 ) {
-    var isChecked = remember { mutableStateOf(false) }
+    var isChecked by remember { mutableStateOf(false) }
 
 
-        Card(
-            modifier = modifier
-                .fillMaxWidth()
-                .padding(5.dp)
-                .size(120.dp),
-            shape = RoundedCornerShape(15.dp),
-            elevation = 5.dp
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(5.dp)
+            .size(120.dp),
+        shape = RoundedCornerShape(15.dp),
+        elevation = 5.dp,
+
         ) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight(0.2f)
+        ) {
+            Image(
+                painter = painter,
+                contentDescription = contentDescription,
+                contentScale = ContentScale.Crop
+            )
             Box(
                 modifier = Modifier
-                    .fillMaxHeight(0.2f)
-            ) {
-                Image(
-                    painter = painter,
-                    contentDescription = contentDescription,
-                    contentScale = ContentScale.Crop
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxHeight(0.21f)
-                        .fillMaxWidth(1f)
-                        .background(
-                            Brush.verticalGradient(
-                                colors = listOf(
-                                    Color.DarkGray,
-                                    Color.Transparent
-                                ),
-                                startY = 0f
-                            )
-                        ),
-                )
-                Box(
-                    modifier = Modifier
-                        .padding(all = 7.dp)
-                        .background(
-                            color = Color.Transparent
+                    .fillMaxHeight(0.21f)
+                    .fillMaxWidth(1f)
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color.DarkGray,
+                                Color.Transparent
+                            ),
+                            startY = 0f
                         )
-                        .size(25.dp)
-                        .align(Alignment.TopEnd)
-                ) {
-                    Checkbox(
-                        checked = isChecked.value,
-                        onCheckedChange = {
-                            isChecked.value = it
-                        },
-                        //   colors = CheckboxDefaults.colors(MaterialTheme.colors.surface),
-                        modifier = Modifier.fillMaxSize(),
+                    ),
+            )
+            Box(
+                modifier = Modifier
+                    .padding(all = 7.dp)
+                    .background(
+                        color = Color.Transparent
+                    )
+                    .size(25.dp)
+                    .align(Alignment.TopEnd)
+            ) {
+                Checkbox(
+                    checked = isChecked,
+                    onCheckedChange = {
+                        isChecked = it
+                    },
+                    modifier = Modifier.fillMaxSize(),
 
                     )
+            }
+
+        }
+    }
+}
+
+@Composable
+fun AudioFilesTabDesign(
+    painter: Painter,
+    contentDescription: String
+) {
+    var isChecked by remember {
+        mutableStateOf(false)
+    }
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .size(80.dp),
+        shape = RoundedCornerShape(0.dp),
+        backgroundColor = MaterialTheme.colors.surface,
+
+        ) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+        )
+        {
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box {
+
                 }
+                Card(
+                    modifier = Modifier
+                        .weight(1f)
+                        .background(Color.Transparent)
+                        .padding(vertical = 15.dp, horizontal = 10.dp),
+                    shape = RoundedCornerShape(15.dp),
+                    elevation = 5.dp
+                ) {
+                    Image(
+                        painter = painter,
+                        contentDescription = contentDescription,
+                        contentScale = ContentScale.Crop
+                    )
+                }
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(4f),
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .background(Color.Transparent)
+                            .fillMaxSize()
+                            .padding(5.dp),
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.Start
+
+                    ) {
+                        Text(
+                            text = "Song Name"
+                        )
+                        Spacer(modifier = Modifier.padding(vertical = 2.dp))
+                        Text(
+                            text = "Song Size"
+                        )
+
+                    }
+                }
+
+                Box(
+                    modifier = Modifier
+                        .background(Color.Transparent)
+                        .weight(0.7f)
+                ) {
+                    Checkbox(
+                        checked = isChecked,
+                        onCheckedChange = {
+                            isChecked = it
+                        },
+                        modifier = Modifier
+                            .fillMaxSize()
+                    )
+
+                }
+
 
             }
         }
-    }
 
+    }
+}
 
 
 @Composable
-fun allAudioFiles(state: Int) {
-    Text(
-        text = "Tab ${state + 1} is Selected"
-    )
+fun DisplayThumbnailItems() {
+    val painter = painterResource(R.drawable.antman)
+    val description = "It is Ant-man"
+    LazyColumn {
+        item {
+            for (i in 1..100) {
+                Row {
+                    ThumbnailTabDesign(
+                        painter = painter,
+                        contentDescription = description,
+                        modifier = Modifier
+                            .weight(1f)
+                    )
+                    ThumbnailTabDesign(
+                        painter = painter,
+                        contentDescription = description,
+                        modifier = Modifier
+                            .weight(1f)
+
+                    )
+                    ThumbnailTabDesign(
+                        painter = painter,
+                        contentDescription = description,
+                        modifier = Modifier
+                            .weight(1f)
+
+                    )
+                }
+            }
+        }
+    }
 }
 
+@Composable
+fun DisplayAudioItems() {
+    LazyColumn {
+        item {
+            for (i in 1..50) {
+                AudioFilesTabDesign(
+                    painter = painterResource(R.drawable.antman),
+                    contentDescription = "This is an Antman"
+                )
+            }
+        }
+
+    }
+}

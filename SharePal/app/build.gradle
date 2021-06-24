@@ -93,7 +93,7 @@ dependencies {
 
     // TIMBER
     implementation 'com.jakewharton.timber:timber:4.7.1'
-    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha07"
+    implementation "androidx.constraintlayout:constraintlayout-compose:1.0.0-alpha08"
 
 
     //Nav Component
@@ -101,5 +101,6 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
 }

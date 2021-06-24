@@ -1,6 +1,5 @@
 package com.hidevelopers.sharepal.presentation.ui.share
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -8,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Android
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,17 +25,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.hidevelopers.sharepal.R
 
-
+// Main Method
 @Composable
 fun SelectDataScreen(
     navController: NavHostController,
     findNavController_openHomePage: NavController,
-    //viewModel: ShareViewModel = viewModel(),
 ) {
-//    Timber.i("${viewModel.getALlAudioList}")
-//    Timber.i("${viewModel.getAllImageList}")
-//    Timber.i("${viewModel.getALlAppInstallList}")
-//    Timber.i("${viewModel.getAllVideoList}")
+
     Surface(
         color = MaterialTheme.colors.surface
     ) {
@@ -44,19 +40,19 @@ fun SelectDataScreen(
                 SelectDataTopBar(
                     goto_homePage = findNavController_openHomePage
                 )
+            },
+            bottomBar = {
+                SelectDataBottomBar()
             }
         ) {
-            Column {
-
-                TabsBar()
-
-
-            }
+            TabsBar()
         }
+
     }
 }
 
-
+// Top Navigation bar,
+// Design and Functionality
 @Composable
 fun SelectDataTopBar(
     goto_homePage: NavController
@@ -87,6 +83,7 @@ fun SelectDataTopBar(
     }
 }
 
+// Design and Functionality of TabBar
 @Composable
 fun TabsBar() {
     var state by remember { mutableStateOf(0) }
@@ -109,7 +106,6 @@ fun TabsBar() {
                 )
             }
         }
-
         when (state) {
 
             0 -> {
@@ -119,7 +115,7 @@ fun TabsBar() {
                 DisplayThumbnailItems()
             }
             2 -> {
-                AllAppsInstalled(state)
+                DisplayAppsInstalled()
             }
             3 -> {
                 DisplayThumbnailItems()
@@ -140,13 +136,9 @@ fun AllFilesOfAndroid(state: Int) {
 }
 
 
-@Composable
-fun AllAppsInstalled(state: Int) {
-    Text(
-        text = "Tab ${state + 1} is Selected"
-    )
-}
 
+// How Photos or Videos displayed,
+// described in "ThumbnailTabDesign" method
 @Composable
 fun ThumbnailTabDesign(
     painter: Painter,
@@ -176,8 +168,8 @@ fun ThumbnailTabDesign(
             )
             Box(
                 modifier = Modifier
-                    .fillMaxHeight(0.21f)
-                    .fillMaxWidth(1f)
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.22f)
                     .background(
                         Brush.verticalGradient(
                             colors = listOf(
@@ -211,6 +203,43 @@ fun ThumbnailTabDesign(
     }
 }
 
+// Display Image and Video files When Photo/Video tab is clicked
+@Composable
+fun DisplayThumbnailItems() {
+    val painter = painterResource(R.drawable.antman)
+    val description = "It is Ant-man"
+    LazyColumn {
+        item {
+            for (i in 1..100) {
+                Row {
+                    ThumbnailTabDesign(
+                        painter = painter,
+                        contentDescription = description,
+                        modifier = Modifier
+                            .weight(1f)
+                    )
+                    ThumbnailTabDesign(
+                        painter = painter,
+                        contentDescription = description,
+                        modifier = Modifier
+                            .weight(1f)
+
+                    )
+                    ThumbnailTabDesign(
+                        painter = painter,
+                        contentDescription = description,
+                        modifier = Modifier
+                            .weight(1f)
+
+                    )
+                }
+            }
+        }
+    }
+}
+
+// How Audio files are Displayed,
+// described in "AudioFilesTabDesign" method
 @Composable
 fun AudioFilesTabDesign(
     painter: Painter,
@@ -301,41 +330,7 @@ fun AudioFilesTabDesign(
     }
 }
 
-
-@Composable
-fun DisplayThumbnailItems() {
-    val painter = painterResource(R.drawable.antman)
-    val description = "It is Ant-man"
-    LazyColumn {
-        item {
-            for (i in 1..100) {
-                Row {
-                    ThumbnailTabDesign(
-                        painter = painter,
-                        contentDescription = description,
-                        modifier = Modifier
-                            .weight(1f)
-                    )
-                    ThumbnailTabDesign(
-                        painter = painter,
-                        contentDescription = description,
-                        modifier = Modifier
-                            .weight(1f)
-
-                    )
-                    ThumbnailTabDesign(
-                        painter = painter,
-                        contentDescription = description,
-                        modifier = Modifier
-                            .weight(1f)
-
-                    )
-                }
-            }
-        }
-    }
-}
-
+// Display Audio Files when Music Tab is clicked
 @Composable
 fun DisplayAudioItems() {
     LazyColumn {
@@ -343,10 +338,143 @@ fun DisplayAudioItems() {
             for (i in 1..50) {
                 AudioFilesTabDesign(
                     painter = painterResource(R.drawable.antman),
-                    contentDescription = "This is an Antman"
+                    contentDescription = "This is an Ant-man"
                 )
             }
         }
+
+    }
+}
+
+// How Apk. files are displayed
+// described in "ApkFilesTabDesign" method
+@Composable
+fun ApkFilesTabDesign(modifier: Modifier = Modifier) {
+    var isChecked by remember {
+        mutableStateOf(false)
+    }
+
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(5.dp)
+            .size(100.dp),
+        shape = RoundedCornerShape(15.dp),
+        elevation = 5.dp,
+
+        ) {
+        Box(
+            modifier = Modifier
+                .fillMaxHeight(0.5f)
+        ) {
+            Icon(
+                Icons.Filled.Android,
+                contentDescription = "Android Icon",
+                modifier = Modifier
+                    .size(80.dp)
+                    .align(Alignment.TopCenter)
+                    .padding(1.dp)
+            )
+            Text(
+                text = "App Name",
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(5.dp),
+                fontWeight = FontWeight.Bold
+            )
+            Box(
+                modifier = Modifier
+                    .padding(all = 10.dp)
+                    .background(
+                        color = Color.Transparent
+                    )
+                    .size(10.dp)
+                    .align(Alignment.TopEnd)
+            ) {
+                Checkbox(
+                    checked = isChecked,
+                    onCheckedChange = {
+                        isChecked = it
+                    }
+
+                )
+            }
+
+        }
+    }
+}
+// Display installed Apps when Apps Tab is clicked
+@Composable
+fun DisplayAppsInstalled(){
+    LazyColumn {
+        item {
+            for (i in 1..100){
+            Row {
+                ApkFilesTabDesign(
+                    modifier = Modifier
+                        .weight(1f)
+                )
+                ApkFilesTabDesign(
+                    modifier = Modifier
+                        .weight(1f)
+                )
+                ApkFilesTabDesign(
+                    modifier = Modifier
+                        .weight(1f)
+                )
+            }
+            }
+        }
+    }
+}
+
+// Bottom Navigation Ba
+@Composable
+fun SelectDataBottomBar() {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth(),
+        backgroundColor = MaterialTheme.colors.surface,
+        elevation = 20.dp,
+        shape = RoundedCornerShape(
+            topStart = 20.dp,
+            topEnd = 20.dp,
+            bottomEnd = 0.dp,
+            bottomStart = 0.dp
+        ),
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(),
+        ) {
+            FloatingActionButton(
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .height(60.dp)
+                    .align(Alignment.CenterEnd)
+                    .fillMaxWidth(0.45f)
+                    .padding(top = 10.dp, bottom = 8.dp, start = 5.dp, end = 5.dp),
+                elevation = FloatingActionButtonDefaults.elevation(0.dp),
+                shape = RoundedCornerShape(10.dp)
+            ) {
+                Text(
+                    text = "SEND",
+                    fontWeight = FontWeight.ExtraBold
+                )
+            }
+
+            TextButton(
+                onClick = { /*TODO*/ },
+                modifier = Modifier
+                    .align(Alignment.CenterStart)
+            ) {
+                Text(
+                    text = "file selected"
+                )
+
+            }
+        }
+
 
     }
 }

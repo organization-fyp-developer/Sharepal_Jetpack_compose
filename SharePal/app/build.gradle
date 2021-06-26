@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
+    //id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -80,18 +80,6 @@ dependencies {
     // Coroutine Lifecycle Scopes
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.3.1"
-
-
-    implementation 'com.google.dagger:hilt-android:2.37'
-    kapt 'com.google.dagger:hilt-compiler:2.37'
-
-    // For instrumentation tests
-    androidTestImplementation  'com.google.dagger:hilt-android-testing:2.37'
-    kaptAndroidTest 'com.google.dagger:hilt-compiler:2.37'
-
-    // For local unit tests
-    testImplementation 'com.google.dagger:hilt-android-testing:2.37'
-    kaptTest 'com.google.dagger:hilt-compiler:2.37'
 
     // TIMBER
     implementation 'com.jakewharton.timber:timber:4.7.1'

@@ -1,4 +1,4 @@
-package com.hidevelopers.sharepal.presentation.ui.main
+package com.hidevelopers.sharepal.presentation.ui.receive
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,24 +11,25 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.hidevelopers.sharepal.presentation.theme.SharepalTheme
 
-class MainInfoFragment:Fragment() {
-
+class ReceiveInfoFragment:Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         return ComposeView(requireContext()).apply {
             setContent {
                 SharepalTheme {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = "home_screen"
+                        startDestination = "receive_data_screen"
                     ){
-                        composable(route = "home_screen"){
-                            HomeScreen(navController = navController)
-                        }
+                       composable(
+                           route = "receive_data_screen"
+                       ){
+                           ReceiveDataScreen(navController)
+                       }
                     }
                 }
             }

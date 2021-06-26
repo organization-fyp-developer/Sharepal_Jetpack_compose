@@ -1,6 +1,6 @@
 package com.hidevelopers.sharepal.utils
 
-import android.app.Application
+import android.content.ContentResolver
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
@@ -13,8 +13,9 @@ inline fun <T> sdk29AndUp(onSdk29: () -> T): T?{
     }else null
 }
 
+
 inline fun <T:MediaData> getMediaList (
-    context: Application,
+    context: Context,
     mediaUri: Uri,
     projection: Array<String>,
     selection: String?,
@@ -38,11 +39,6 @@ inline fun <T:MediaData> getMediaList (
         }
     }catch (ex: Exception){
 
-    }
-    cursor?.let {
-        if(!it.isClosed){
-            it.close()
-        }
     }
     return saveMediaList
 }

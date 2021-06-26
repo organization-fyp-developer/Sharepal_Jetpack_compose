@@ -1,4 +1,4 @@
-package com.hidevelopers.sharepal.presentation.ui.share
+package com.hidevelopers.sharepal.presentation.ui.share//package com.hidevelopers.sharepal.presentation.ui.share
 
 
 import android.app.Application

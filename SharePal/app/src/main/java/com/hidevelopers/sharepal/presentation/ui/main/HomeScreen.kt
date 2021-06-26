@@ -13,12 +13,14 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import com.hidevelopers.sharepal.R
+import com.hidevelopers.sharepal.presentation.ui.share.ShareViewModel
 
 
 @Composable
 fun HomeScreen(
     navController: NavController,
-    viewModel: MainInfoVIewModel = viewModel()
+    viewModel: MainInfoVIewModel = viewModel(),
+    _viewModel: ShareViewModel = viewModel()
 ) {
     Surface(
         color = MaterialTheme.colors.surface

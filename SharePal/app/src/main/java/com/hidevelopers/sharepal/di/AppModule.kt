@@ -1,6 +1,8 @@
 package com.hidevelopers.sharepal.di
 
 import android.content.Context
+import com.hidevelopers.sharepal.repository.ExternalStorageRepository
+import com.hidevelopers.sharepal.repository.StorageRepo
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,7 +22,13 @@ object AppModule {
         @ApplicationContext context: Context
     ) = context
 
-    @Singleton
-    @Provides
-    fun provideMainDispatcher() = Dispatchers.Main as CoroutineDispatcher
+//    @Singleton
+//    @Provides
+//    fun provideMainDispatcher() = Dispatchers.Main as CoroutineDispatcher
+
+//    @Singleton
+//    @Provides
+//    fun provideRepository(
+//        @ApplicationContext context: Context
+//    ) = StorageRepo(context) as ExternalStorageRepository
 }

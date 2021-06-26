@@ -3,6 +3,8 @@ package com.hidevelopers.sharepal.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.runtime.Composable
+import androidx.viewpager.widget.PagerAdapter
 import com.hidevelopers.sharepal.R
 
 

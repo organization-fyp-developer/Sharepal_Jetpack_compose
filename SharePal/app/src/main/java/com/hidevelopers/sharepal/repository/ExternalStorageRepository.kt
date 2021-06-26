@@ -1,7 +1,6 @@
 package com.hidevelopers.sharepal.repository
 
-
-import com.hhdeveloper.sharingapplication.datasource.data.AppData
+import com.hidevelopers.sharepal.repository.data.AppData
 import com.hidevelopers.sharepal.repository.data.AudioData
 import com.hidevelopers.sharepal.repository.data.ImageData
 import com.hidevelopers.sharepal.repository.data.VideoData

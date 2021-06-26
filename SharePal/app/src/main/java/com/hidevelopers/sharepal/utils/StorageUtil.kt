@@ -1,12 +1,11 @@
 package com.hidevelopers.sharepal.utils
 
-import android.content.ContentResolver
+import android.app.Application
 import android.content.Context
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import com.hidevelopers.sharepal.repository.data.MediaData
-import javax.inject.Inject
 
 inline fun <T> sdk29AndUp(onSdk29: () -> T): T?{
     return if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
@@ -14,9 +13,8 @@ inline fun <T> sdk29AndUp(onSdk29: () -> T): T?{
     }else null
 }
 
-@Inject
 inline fun <T:MediaData> getMediaList (
-    context: Context,
+    context: Application,
     mediaUri: Uri,
     projection: Array<String>,
     selection: String?,
@@ -40,6 +38,11 @@ inline fun <T:MediaData> getMediaList (
         }
     }catch (ex: Exception){
 
+    }
+    cursor?.let {
+        if(!it.isClosed){
+            it.close()
+        }
     }
     return saveMediaList
 }

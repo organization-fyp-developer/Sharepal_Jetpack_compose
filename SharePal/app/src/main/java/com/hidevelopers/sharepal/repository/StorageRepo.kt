@@ -1,6 +1,7 @@
 package com.hidevelopers.sharepal.repository
 
 
+import android.app.Application
 import android.content.ContentUris
 import android.content.Context
 import android.content.Intent
@@ -10,23 +11,22 @@ import android.content.pm.ResolveInfo
 import android.graphics.drawable.Drawable
 import android.provider.MediaStore
 import androidx.core.content.ContextCompat
-import com.hhdeveloper.sharingapplication.datasource.data.AppData
 import com.hidevelopers.sharepal.R
+import com.hidevelopers.sharepal.repository.data.AppData
 import com.hidevelopers.sharepal.repository.data.AudioData
 import com.hidevelopers.sharepal.repository.data.ImageData
 import com.hidevelopers.sharepal.repository.data.VideoData
 import com.hidevelopers.sharepal.utils.getMediaList
 import com.hidevelopers.sharepal.utils.sdk29AndUp
 import com.hidevelopers.sharepal.utils.timeConversion
+import dagger.hilt.android.qualifiers.ApplicationContext
+import timber.log.Timber
 import java.io.File
 import java.lang.Exception
 import javax.inject.Inject
 
 
-class StorageRepo : ExternalStorageRepository {
-
-    @Inject
-    lateinit var context: Context
+class StorageRepo (private val context: Application) : ExternalStorageRepository {
 
     override suspend fun getVideosList(): List<VideoData> {
         val collection = sdk29AndUp {
